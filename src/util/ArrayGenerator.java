@@ -15,4 +15,9 @@ public class ArrayGenerator {
 
         return a;
     }
+
+    // Aufgabe:
+    // Überlegen Sie 2 verschiedene Wege,
+    // wie man Zahlenarrays erzeugen kann,
+    // die garantiert keine Dopplungen enthalten
 }
