@@ -1,6 +1,6 @@
 package sortieren;
 
-import java.util.Arrays;
+import util.Util;
 
 public class BubbleSort {
     int[] a;
@@ -14,15 +14,9 @@ public class BubbleSort {
         for (int i = a.length - 1; i > 0; i--) {
             for (int j = 0; j < i; j++) {
                 if (a[j] > a[j+1]) {
-                    swap(a, j, j+1);
+                    Util.swap(a, j, j+1);
                 }
             }
         }
-    }
-
-    private void swap(int[] a, int x, int y) {
-        int temp = a[x];
-        a[x] = a[y];
-        a[y] = temp;
     }
 }
