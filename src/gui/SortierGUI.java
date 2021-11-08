@@ -6,10 +6,13 @@ import java.awt.event.ActionListener;
 import java.util.Objects;
 
 public class SortierGUI extends JFrame {
-    private JButton bKnopf;
     private JPanel pMain;
     private JTextArea taAusgabe;
     private JButton bSortieren;
+    private JPanel pButtons;
+    private JPanel pOutput;
+    private JPanel POut;
+    private ArrayPanel pArray;
 
     public SortierGUI() {
         bSortieren.addActionListener(new ActionListener() {
@@ -20,16 +23,8 @@ public class SortierGUI extends JFrame {
             }
         });
 
-        bKnopf.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (Objects.equals(bKnopf.getText(), "Bombe")) {
-                    bKnopf.setText("Bumm!");
-                } else {
-                    bKnopf.setText("Bombe");
-                }
-            }
-        });
+        pArray = new ArrayPanel();
+        POut.add(pArray);
 
         add(pMain);
         setSize(800, 600);
