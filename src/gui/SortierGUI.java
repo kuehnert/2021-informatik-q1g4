@@ -1,9 +1,10 @@
 package gui;
 
+import sortieren.BubbleSort;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Objects;
 
 public class SortierGUI extends JFrame {
     private JPanel pMain;
@@ -13,13 +14,15 @@ public class SortierGUI extends JFrame {
     private JPanel pOutput;
     private JPanel POut;
     private ArrayPanel pArray;
+    private SortierAusgabe ausgabe;
 
     public SortierGUI() {
+        ausgabe = new SortierAusgabe(taAusgabe);
         bSortieren.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String ausgabe = SortierAusgabe.sortieren();
-                taAusgabe.setText(ausgabe);
+                BubbleSort bsort = new BubbleSort(new int[]{3, 6, 12, 8, 3, 78, 3, 5}, ausgabe);
+                bsort.sortieren();
             }
         });
 
@@ -28,7 +31,7 @@ public class SortierGUI extends JFrame {
 
         add(pMain);
         setSize(800, 600);
-        setTitle("Mein Fenster 11");
+        setTitle("Mein Fenster 11G4");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
     }

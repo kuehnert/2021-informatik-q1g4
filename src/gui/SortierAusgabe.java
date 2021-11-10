@@ -2,19 +2,21 @@ package gui;
 
 import sortieren.InsertionSort;
 
+import javax.swing.*;
 import java.util.Arrays;
 
 public class SortierAusgabe {
-    public static String sortieren() {
-        String out = "";
-        // Statisches Array
-        int[] zahlen = {7, 20, 1, 5, 87, 9, 13, 10, 38, -1};
-        InsertionSort sorter = new InsertionSort(zahlen);
+    private JTextArea textArea;
+    private String out;
 
-        out += Arrays.toString(zahlen) + "\n";
-        sorter.sortieren();
-        out += Arrays.toString(zahlen) + "\n";
+    public SortierAusgabe(JTextArea textArea) {
+        this.textArea = textArea;
+        out = "Neue SortierAusgabe";
+        this.textArea.setText(out);
+    }
 
-        return out;
+    public void println(String s) {
+        out += s + "\n";
+        this.textArea.setText(out);
     }
 }
