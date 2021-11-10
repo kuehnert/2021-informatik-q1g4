@@ -10,22 +10,24 @@ public class ArrayPanel extends JPanel {
     public ArrayPanel() {
         super(true);
         setPreferredSize(new Dimension(200, 200));
-        array = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        array = new int[]{3, 1, 4, 5, 2, 8, 10 , 6, 7, 9};
     }
 
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-
         Rectangle r = g.getClipBounds();
-        g.drawRect(r.x, r.y, r.width, r.height);
 
         int colWidth = r.width / array.length;
         g.setColor(Color.BLUE);
 
         for (int i = 0; i < array.length; i++) {
-            g.fillRect(r.x + i * colWidth, r.y, colWidth, array[i] * r.height / array.length);
+            int hoehe = array[i] * r.height / array.length;
+            g.fillRect(r.x + i * colWidth, r.y+r.height-hoehe, colWidth, hoehe);
         }
+
+        g.setColor(Color.BLACK);
+        g.drawRect(r.x, r.y, r.width-1, r.height-1);
     }
 }
 // r.x = 0; r.y = 0; r.width = 200; r.height = 200; colWidth = 20; a.length = 10
