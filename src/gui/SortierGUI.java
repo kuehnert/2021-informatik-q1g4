@@ -15,18 +15,21 @@ public class SortierGUI extends JFrame {
     private JPanel POut;
     private ArrayPanel pArray;
     private SortierAusgabe ausgabe;
+    private int[] array;
 
     public SortierGUI() {
+        array = new int[]{3, 6, 12, 8, 3, 78, 3, 5};
         ausgabe = new SortierAusgabe(taAusgabe);
         bSortieren.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                BubbleSort bsort = new BubbleSort(new int[]{3, 6, 12, 8, 3, 78, 3, 5}, ausgabe);
+                BubbleSort bsort = new BubbleSort(array, ausgabe);
                 bsort.sortieren();
+            pArray.setArray(array);
             }
         });
 
-        pArray = new ArrayPanel();
+        pArray = new ArrayPanel(array);
         POut.add(pArray);
 
         add(pMain);

@@ -9,9 +9,12 @@ public class ArrayPanel extends JPanel {
     private int maxValue;
 
     public ArrayPanel() {
+        this(new int[]{3, 1, 12, 25, 20, 5, 30, 5, 4, 5, 2, 8, 10, 6, 7, 9});
+    }
+    public ArrayPanel(int[] array) {
         super(true);
         setPreferredSize(new Dimension(200, 200));
-        setArray(new int[]{3, 1, 12, 25, 20, 5, 48, 5, 4, 5, 2, 8, 10, 6, 7, 9});
+        setArray(array);
     }
 
     public void setArray(int[] array) {
@@ -40,4 +43,3 @@ public class ArrayPanel extends JPanel {
         g.drawRect(r.x, r.y, r.width - 1, r.height - 1);
     }
 }
-// r.x = 0; r.y = 0; r.width = 200; r.height = 200; colWidth = 20; a.length = 10
