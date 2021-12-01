@@ -1,5 +1,7 @@
 package gui;
 
+import util.Util;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -23,7 +25,24 @@ public class ArrayPanel extends JPanel {
         for (int e : array) {
             maxValue = Math.max(maxValue, e);
         }
+
         repaint();
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void swap(int i, int j) {
+        Util.swap(array, i, j);
+        repaint();
+
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
