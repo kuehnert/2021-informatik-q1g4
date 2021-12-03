@@ -1,5 +1,3 @@
-package advent;
-
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -23,7 +21,7 @@ public class Util {
 
     public static List<String> loadStringList(String filename) {
         try {
-            Path p = Paths.get("src/advent/" + filename);
+            Path p = Paths.get("./" + filename);
             return Files.readAllLines(p, StandardCharsets.UTF_8);
         } catch (IOException e) {
             return new ArrayList<String>();
