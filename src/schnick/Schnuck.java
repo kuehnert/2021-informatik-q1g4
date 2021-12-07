@@ -8,14 +8,17 @@ import java.io.IOException;
 import java.util.Random;
 
 public class Schnuck extends JFrame {
-    public static int ROCK = 0;
-    public static int PAPER = 1;
-    public static int SCISSORS = 2;
+    public static final int PLAYER = 0;
+    public static final int COMPUTER = 1;
 
-    public ImageIcon iRock;
-    public ImageIcon iPaper;
-    public ImageIcon iScissors;
-    public ImageIcon[] icons;
+    public static final int ROCK = 0;
+    public static final int PAPER = 1;
+    public static final int SCISSORS = 2;
+
+    private ImageIcon iRock;
+    private ImageIcon iPaper;
+    private ImageIcon iScissors;
+    private ImageIcon[] icons;
 
     private Random random = new Random();
     private JButton bRock;
@@ -23,6 +26,8 @@ public class Schnuck extends JFrame {
     private JButton pScissors;
     private JLabel lbComputer;
     private JPanel pMain;
+    private JButton startButton;
+    private JPanel pStart;
 
     public Schnuck() {
         super();
@@ -67,5 +72,22 @@ public class Schnuck extends JFrame {
     private void makePlay(int playerChoice) {
         int computerChoice = random.nextInt(3);
         lbComputer.setIcon(icons[computerChoice]);
+        int winner = -1;
+
+        if (computerChoice == playerChoice) {
+            // Patt: Wiederholen
+            JOptionPane.showMessageDialog(this,"Beide haben das gleiche; Runde muss wiederholt werden!");
+        } else if (computerChoice == ROCK &&  playerChoice == PAPER) {
+            winner = PLAYER;
+        } else if (computerChoice == ROCK &&  playerChoice == SCISSORS) {
+            winner = COMPUTER;
+        }
+
+        if (winner == PLAYER) {
+            JOptionPane.showMessageDialog(this,"Du hast gewonnen!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Du hast verloren!");
+        }
     }
+
 }
