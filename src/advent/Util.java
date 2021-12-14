@@ -27,4 +27,13 @@ public class Util {
             return new ArrayList<String>();
         }
     }
+
+    public static String loadString(String filename) {
+        try {
+            Path p = Paths.get("./" + filename);
+            return Files.readString(p);
+        } catch (IOException e) {
+            return null;
+        }
+    }
 }
