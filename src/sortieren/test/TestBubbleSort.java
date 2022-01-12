@@ -1,4 +1,4 @@
-package test;
+package sortieren.test;
 
 import sortieren.BubbleSort;
 import util.ArrayGenerator;

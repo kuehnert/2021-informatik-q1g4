@@ -1,4 +1,4 @@
-package test;
+package sortieren.test;
 
 import util.ArrayGenerator;
 

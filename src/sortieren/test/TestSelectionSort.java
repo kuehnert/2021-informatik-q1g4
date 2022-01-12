@@ -1,16 +1,14 @@
-package test;
+package sortieren.test;
 
-import sortieren.InsertionSort;
+import sortieren.SelectionSort;
 
 import java.util.Arrays;
 
-public class TestInsertionSort {
+public class TestSelectionSort {
     public static void main(String[] args) {
-        System.out.println("TestInsertionSort");
-
         // Statisches Array
-        int[] zahlen = {7, 20, 1, 5, 87, 9, 13, 10, 38, -1};
-        InsertionSort sorter = new InsertionSort(zahlen);
+        int[] zahlen = {7, 1, 5, 87, 9, 13, 10, 38, -1};
+        SelectionSort sorter = new SelectionSort(zahlen);
 
         System.out.println(Arrays.toString(zahlen));
         sorter.sortieren();
@@ -18,7 +16,7 @@ public class TestInsertionSort {
 
         // Zufallsarray
         // int[] zahlen2 = ArrayGenerator.randomNumbers(100, 10_000);
-        // InsertionSort sorter2 = new InsertionSort(zahlen2);
+        // SelectionSort sorter2 = new SelectionSort(zahlen2);
 
         // System.out.println(Arrays.toString(zahlen2));
         // sorter2.sortieren();

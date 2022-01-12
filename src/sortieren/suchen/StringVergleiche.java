@@ -1,4 +1,4 @@
-package suchen;
+package sortieren.suchen;
 
 public class StringVergleiche {
     public StringVergleiche() {

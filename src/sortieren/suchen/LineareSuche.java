@@ -1,4 +1,4 @@
-package suchen;
+package sortieren.suchen;
 
 /**
  * Suchen Sie in einem Array von Kommazahlen eine Bestimmte, zB 3.5 HAUSAUFGABE: Verbessern Sie die Suche so, dass
@@ -8,10 +8,10 @@ public class LineareSuche {
     private double[] zahlen;
 
     /**
-     * Wird bei Erstellung eines Objekts von suchen.LineareSuche ausgefuehrt
+     * Wird bei Erstellung eines Objekts von sortieren.suchen.LineareSuche ausgefuehrt
      */
     public LineareSuche() {
-        System.out.println("suchen.LineareSuche()");
+        System.out.println("sortieren.suchen.LineareSuche()");
         double gesucht = 3.1415 / 3.0 * 3.0;
         zahlen = new double[]{3.7, -0.5555, 98452456465465978.3876, 0.0, 0.000000000001};
 
@@ -25,7 +25,7 @@ public class LineareSuche {
     }
 
     public int suchen(double[] a, double gesucht) {
-        System.out.println("suchen()");
+        System.out.println("sortieren.suchen()");
 
         for (int i = 0; i < a.length; i++) {
             // a[i]    3.14122  => 31412
