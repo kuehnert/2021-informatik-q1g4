@@ -6,6 +6,7 @@ class FieldButton extends JButton {
     private final ImageHelper images;
     private final int index;
     private boolean mine;
+    private boolean flag;
     private int mineCount;
 
     public FieldButton(ImageHelper images, int index) {
@@ -25,6 +26,7 @@ class FieldButton extends JButton {
 
     public void reset() {
         mine = false;
+        flag = false;
         mineCount = 0;
         setName("mine0");
         setIcon(images.getImage("field"));
@@ -39,6 +41,7 @@ class FieldButton extends JButton {
     }
 
     public boolean aufdecken() {
+        if (flag) return false;
         setDisabledIcon(images.getImage(getName()));
         setEnabled(false);
         return mine;
@@ -55,6 +58,15 @@ class FieldButton extends JButton {
             mineCount = 9;
             setName("mine");
             setDisabledIcon(images.getImage("mine"));
+        }
+    }
+
+    public void toggleFlag() {
+        flag = !flag;
+        if (flag) {
+            setIcon(images.getImage("flag"));
+        } else {
+            setIcon(images.getImage("field"));
         }
     }
 }

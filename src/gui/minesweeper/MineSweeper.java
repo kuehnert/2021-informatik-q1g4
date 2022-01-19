@@ -1,13 +1,9 @@
 package gui.minesweeper;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.IOException;
+import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Random;
 
 // t1p.de/uv4p
@@ -18,11 +14,14 @@ public class MineSweeper extends JFrame {
     private final FieldButton[] field;
     private final ImageHelper helper;
     private boolean gameRunning;
+    private int remaining;
     private JPanel pMain;
     private JPanel pButtons;
     private JPanel pMinefield;
     private JButton restartButton;
     private JButton debugButton;
+    private JLabel lbRunning;
+    private JLabel lbMineCount;
 
     public MineSweeper() {
         super("Mr K.'s MineSweeper");
@@ -35,7 +34,7 @@ public class MineSweeper extends JFrame {
 
         for (int i = 0; i < cols * rows; i++) {
             FieldButton fb = new FieldButton(helper, i);
-            fb.addActionListener(fbl);
+            fb.addMouseListener(fbl);
             fb.setIcon(helper.getImage("field"));
             fb.setBorder(null);
             field[i] = fb;
@@ -44,6 +43,7 @@ public class MineSweeper extends JFrame {
 
         add(pMain);
         pack();
+        setLocationRelativeTo(null);
         setVisible(true);
 
         restartGame();
@@ -63,6 +63,15 @@ public class MineSweeper extends JFrame {
 
     public static void main(String[] args) {
         new MineSweeper();
+    }
+
+    public void resetRemaining() {
+        remaining = cols * rows - mineCount;
+        lbMineCount.setText("" + remaining);
+    }
+
+    public void decRemaining() {
+        lbMineCount.setText("" + --remaining);
     }
 
     private void restartGame() {
@@ -89,10 +98,15 @@ public class MineSweeper extends JFrame {
             }
         }
 
+        resetRemaining();
         gameRunning = true;
+        lbRunning.setText("START");
     }
 
     private void showAll() {
+        gameRunning = false;
+        lbRunning.setText("STOP");
+
         for (FieldButton fb : field) {
             fb.aufdecken();
         }
@@ -107,7 +121,7 @@ public class MineSweeper extends JFrame {
                 int scol = index % cols;
                 int tcol = (index + c) % cols;
 
-                if ((c == 0 && r == 0) || target < 0 || target >= rows * cols || (scol == 0 && tcol == cols - 1 || (scol == cols - 1 && tcol == 0))) {
+                if ((c == 0 && r == 0) || target < 0 || tcol < 0 || target >= rows * cols || (scol == 0 && tcol == cols - 1 || (scol == cols - 1 && tcol == 0))) {
                     continue;
                 }
 
@@ -120,27 +134,54 @@ public class MineSweeper extends JFrame {
 
     private void aufdecken(int index) {
         FieldButton fb = field[index];
-        if (!gameRunning) {return;}
+
+        if (!gameRunning || !fb.isEnabled()) {
+            return;
+        }
 
         boolean wasMine = fb.aufdecken();
-
         if (wasMine) {
             gameRunning = false;
+            lbRunning.setText("STOP");
+            showMines();
+
+            fb.setDisabledIcon(helper.getImage("red"));
+            JOptionPane.showMessageDialog(this, "Game Over! You lost.");
         } else {
+            decRemaining();
             if (fb.getMineCount() == 0) {
                 ArrayList<Integer> nb = getNeighbours(index);
+
                 for (Integer i : nb) {
                     aufdecken(i);
                 }
             }
+
+            if (remaining == 0) {
+                showMines();
+                JOptionPane.showMessageDialog(this, "You have won, congratulations!");
+            }
         }
     }
 
-    class FieldButtonListener implements ActionListener {
+    private void showMines() {
+        for (FieldButton b : field) {
+            if (b.isMine()) {
+                b.aufdecken();
+            }
+        }
+    }
+
+    class FieldButtonListener extends MouseAdapter {
         @Override
-        public void actionPerformed(ActionEvent e) {
+        public void mousePressed(MouseEvent e) {
             FieldButton fb = (FieldButton) e.getSource();
-            aufdecken(fb.getIndex());
+
+            if (SwingUtilities.isRightMouseButton(e)) {
+                fb.toggleFlag();
+            } else {
+                aufdecken(fb.getIndex());
+            }
         }
     }
 }
