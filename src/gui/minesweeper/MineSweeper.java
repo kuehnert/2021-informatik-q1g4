@@ -1,4 +1,4 @@
-package gui;
+package gui.minesweeper;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -17,6 +17,7 @@ public class MineSweeper extends JFrame {
     private final int mineCount = 10;
     private final FieldButton[] field;
     private final ImageHelper helper;
+    private boolean gameRunning;
     private JPanel pMain;
     private JPanel pButtons;
     private JPanel pMinefield;
@@ -87,6 +88,8 @@ public class MineSweeper extends JFrame {
                 field[n].incMineCount();
             }
         }
+
+        gameRunning = true;
     }
 
     private void showAll() {
@@ -117,13 +120,18 @@ public class MineSweeper extends JFrame {
 
     private void aufdecken(int index) {
         FieldButton fb = field[index];
-        if (!fb.isEnabled()) {return;}
-        fb.aufdecken();
+        if (!gameRunning) {return;}
 
-        if (fb.getMineCount() == 0) {
-            ArrayList<Integer> nb = getNeighbours(index);
-            for (Integer i : nb) {
-                aufdecken(i);
+        boolean wasMine = fb.aufdecken();
+
+        if (wasMine) {
+            gameRunning = false;
+        } else {
+            if (fb.getMineCount() == 0) {
+                ArrayList<Integer> nb = getNeighbours(index);
+                for (Integer i : nb) {
+                    aufdecken(i);
+                }
             }
         }
     }
@@ -134,88 +142,5 @@ public class MineSweeper extends JFrame {
             FieldButton fb = (FieldButton) e.getSource();
             aufdecken(fb.getIndex());
         }
-    }
-}
-
-class FieldButton extends JButton {
-    private final ImageHelper images;
-    private final int index;
-    private boolean mine;
-    private int mineCount;
-
-    public FieldButton(ImageHelper images, int index) {
-        super();
-        this.images = images;
-        this.index = index;
-        reset();
-    }
-
-    public int getMineCount() {
-        return mineCount;
-    }
-
-    public int getIndex() {
-        return index;
-    }
-
-    public void reset() {
-        mine = false;
-        mineCount = 0;
-        setName("mine0");
-        setIcon(images.getImage("field"));
-        setEnabled(true);
-    }
-
-    public void incMineCount() {
-        if (!mine) {
-            setName("mine" + ++mineCount);
-        }
-    }
-
-    public void aufdecken() {
-        setDisabledIcon(images.getImage(getName()));
-        setEnabled(false);
-    }
-
-    public boolean isMine() {
-        return mine;
-    }
-
-    public void setMine(boolean mine) {
-        this.mine = mine;
-        if (mine) {
-            mineCount = 9;
-            setName("mine");
-            setDisabledIcon(images.getImage("mine"));
-        }
-    }
-}
-
-class ImageHelper {
-    MineSweeper main;
-    HashMap<String, ImageIcon> images = new HashMap<>();
-    String[] names = {"field", "flag", "mine", "red", "mine0", "mine1", "mine2", "mine3", "mine4", "mine5", "mine6",
-            "mine7", "mine8"};
-
-    public ImageHelper(MineSweeper main) {
-        this.main = main;
-
-        for (String name : names) {
-            ImageIcon icon = null;
-            String fname = "../ms/" + name + ".png";
-
-            try {
-                icon = new ImageIcon(ImageIO.read(main.getClass().getResource(fname)));
-                images.put(name, icon);
-            } catch (IllegalArgumentException iae) {
-                System.err.println("Fehler beim Laden von " + fname);
-            } catch (IOException ioe) {
-                System.err.println("Fehler beim Laden von " + fname);
-            }
-        }
-    }
-
-    public ImageIcon getImage(String id) {
-        return images.get(id);
     }
 }
