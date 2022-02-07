@@ -1,6 +1,6 @@
 package rekursion;
 
-public class Rekursion1 {
+public class RekursionOhneRueckgabe {
     // Endlosrekursion
     public static void rekursion1() {
         rekursion1();
@@ -47,25 +47,7 @@ public class Rekursion1 {
         }
     }
 
-    public static int multipliziereIterativ(int a, int b) {
-        int produkt = 0;
-        for (int i = 0; i < b; i++) {
-            produkt = produkt + a;
-        }
-        return produkt;
-    }
-
-    public static int multipliziereRekursiv(int a, int b, int c) {
-        if (b == 0) {
-            return c;
-        } else {
-            return multipliziereRekursiv(a, b-1, c + a);
-        }
-    }
-
     public static void main(String[] args) {
         // rekursion5(5);
-        System.out.println(multipliziereIterativ(4, 7));
-        System.out.println(multipliziereRekursiv(4, 7, 0));
     }
 }
