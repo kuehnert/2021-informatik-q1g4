@@ -26,8 +26,11 @@ public class Fibonacci {
 
     public static void main(String[] args) {
         long start, result, duration;
-        fibonacciRekursiv(20);
-        System.out.println(counter + " Aufrufe");
+        // fibonacciRekursiv(20);
+        // System.out.println(counter + " Aufrufe");
+
+        FibonacciMemoized fm = new FibonacciMemoized();
+        System.out.println(fm.fibonacciMemoized(77));
 
         // for (int i = 30; i <= 52; i++) {
         //     start = System.currentTimeMillis();
