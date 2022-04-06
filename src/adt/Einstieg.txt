@@ -1,0 +1,29 @@
+Abstrakte Datentypen (ADT)
+
+* Setzen sich ab von ...
+  * Primitive Datentypen (int, float, double, boolean)
+    in Java alle, die mit Kleinbuchstaben anfangen
+  * Erweiterte Datentypen, Klassen = Referenzdatentypen:
+    String, BigInteger, Integer (Auto-Boxing)
+* ADT:
+  * Abstrakt im Sinn von:
+    Es ist nur die Schnittstelle (~ API, Interface) bekannt, nicht die Implementierung (dem Programmierer)
+  * Beispiele:
+      - Queue (Schlange),
+      - Stack (Keller),
+      - List (Liste),
+      - Tree (Baum),
+      - Graph (Graph),
+      - HashMap, Map, ... (HashMap)
+
+* Queue = Schlange
+  * Modell Warteschlange, d.h. viele Personen stehen vor einem Laden
+  * FIFO = First In, First Out
+  * Notwendige Operationen:
+    * add(Element e) => Hängt ein Element hinten an die Schlange an
+    * remove(): Element => Entfernt das erste Element und gibt es zurück
+    * first(): Element => Gibt das vorderste Element zurück
+    * clear() => Leert die Schlange
+    * isEmpty(): boolean => Gibt zurück, ob die Liste leer
+  * Nice to have:
+    * size(): int => Gibt die Anzahl der Elemente zurück
