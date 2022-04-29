@@ -25,20 +25,24 @@ public class Queue {
 
     // HA: "5127" => "[5, 12, 7]"
     public String print() {
-        String output = "";
-        // 1. Wir nehmen eine Variable runner und setzen sie auf first
-        Item runner = first;
+        if (isEmpty()) {
+            return "[]";
+        } else {
+            String output = "[";
+            // 1. Wir nehmen eine Variable runner und setzen sie auf first
+            Item runner = first;
 
-        // 2. Solange das Element runner einen Nachfolger hat
-        while (runner != null) {
-            // 3. Drucke die data von runner aus
-            output += runner.getData();
+            // 2. Solange das Element runner einen Nachfolger hat
+            while (runner.getNext() != null) {
+                // 3. Drucke die data von runner aus
+                output += runner.getData() + ", ";
 
-            // 4. Setze runner auf das nächste Element
-            runner = runner.getNext();
+                // 4. Setze runner auf das nächste Element
+                runner = runner.getNext();
+            }
+
+            return output + runner.getData() + "]";
         }
-
-        return output;
     }
 
     // isEmpty(): boolean => Gibt zurück, ob die Liste leer
