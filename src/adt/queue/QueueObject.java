@@ -1,20 +1,20 @@
 package adt.queue;
 
-public class Queue<T> {
-    Item<T> first;
+public class QueueObject {
+    ItemObject first;
 
-    public Queue() {
+    public QueueObject() {
         first = null;
     }
 
     // add(Element e) => Hängt ein Element hinten an die Schlange an
-    public void enQueue(T data) {
-        Item<T> tmp = new Item<T>(data);
+    public void enqueue(Object data) {
+        ItemObject tmp = new ItemObject(data);
 
         if (first == null) {
             first = tmp;
         } else {
-            Item<T> runner = first;
+            ItemObject runner = first;
             while (runner.getNext() != null) {
                 runner = runner.getNext();
             }
@@ -30,7 +30,7 @@ public class Queue<T> {
         } else {
             String output = "[";
             // 1. Wir nehmen eine Variable runner und setzen sie auf first
-            Item runner = first;
+            ItemObject runner = first;
 
             // 2. Solange das Element runner einen Nachfolger hat
             while (runner.getNext() != null) {
@@ -41,7 +41,7 @@ public class Queue<T> {
                 runner = runner.getNext();
             }
 
-            return output + runner.getData() + "]";
+            return output + runner.getData().toString() + "]";
         }
     }
 
@@ -56,7 +56,7 @@ public class Queue<T> {
     }
 
     // first(): Element => Gibt das vorderste Element zurück
-    public T first() {
+    public Object first() {
         if (first == null) {
             throw new RuntimeException("Schlange ist leer!");
         }
@@ -64,19 +64,19 @@ public class Queue<T> {
         return first.getData();
     }
 
-    // deQueue(): Element => Entfernt das erste Element und gibt es zurück
-    public T deQueue() {
+    // dequeue(): Element => Entfernt das erste Element und gibt es zurück
+    public Object dequeue() {
         if (isEmpty()) {
             throw new RuntimeException("Queue ist leer!");
         }
 
-        T data = first.getData();
+        Object data = first.getData();
         first = first.getNext();
         return data;
     }
 
     public int getSize() {
-        Item runner = first;
+        ItemObject runner = first;
         int anzahl = 0;
 
         // 2. Solange das Element runner einen Nachfolger hat
@@ -88,5 +88,30 @@ public class Queue<T> {
         }
 
         return anzahl;
+    }
+}
+
+class ItemObject {
+    private Object data;
+    private ItemObject next;
+
+    public ItemObject(Object data) {
+        setData(data);
+    }
+
+    public Object getData() {
+        return data;
+    }
+
+    public void setData(Object data) {
+        this.data = data;
+    }
+
+    public ItemObject getNext() {
+        return next;
+    }
+
+    public void setNext(ItemObject next) {
+        this.next = next;
     }
 }

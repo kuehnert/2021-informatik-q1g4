@@ -1,20 +1,20 @@
-package adt.queue;
+package adt.beispiele;
 
-public class Queue<T> {
-    Item<T> first;
+public class QueueKunde {
+    Item first;
 
-    public Queue() {
+    public QueueKunde() {
         first = null;
     }
 
     // add(Element e) => Hängt ein Element hinten an die Schlange an
-    public void enQueue(T data) {
-        Item<T> tmp = new Item<T>(data);
+    public void enqueue(Kunde data) {
+        Item tmp = new Item(data);
 
         if (first == null) {
             first = tmp;
         } else {
-            Item<T> runner = first;
+            Item runner = first;
             while (runner.getNext() != null) {
                 runner = runner.getNext();
             }
@@ -56,7 +56,7 @@ public class Queue<T> {
     }
 
     // first(): Element => Gibt das vorderste Element zurück
-    public T first() {
+    public Kunde first() {
         if (first == null) {
             throw new RuntimeException("Schlange ist leer!");
         }
@@ -64,13 +64,13 @@ public class Queue<T> {
         return first.getData();
     }
 
-    // deQueue(): Element => Entfernt das erste Element und gibt es zurück
-    public T deQueue() {
+    // dequeue(): Element => Entfernt das erste Element und gibt es zurück
+    public Kunde dequeue() {
         if (isEmpty()) {
             throw new RuntimeException("Queue ist leer!");
         }
 
-        T data = first.getData();
+        Kunde data = first.getData();
         first = first.getNext();
         return data;
     }
@@ -88,5 +88,30 @@ public class Queue<T> {
         }
 
         return anzahl;
+    }
+}
+
+class Item {
+    private Kunde data;
+    private Item next;
+
+    public Item(Kunde data) {
+        setData(data);
+    }
+
+    public Kunde getData() {
+        return data;
+    }
+
+    public void setData(Kunde data) {
+        this.data = data;
+    }
+
+    public Item getNext() {
+        return next;
+    }
+
+    public void setNext(Item next) {
+        this.next = next;
     }
 }
