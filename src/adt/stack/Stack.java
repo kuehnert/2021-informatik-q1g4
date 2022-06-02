@@ -11,7 +11,7 @@ public class Stack<T> {
         // 1. Erstelle neues Element mit data
         Item<T> newItem = new Item(data);
         // 2. Setze Nachfolger von newItem
-        // auf ehem. top
+        // auf ehemaliges top
         newItem.setNext(top);
         // 3. top wird zu newItem
         top = newItem;
