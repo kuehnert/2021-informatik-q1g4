@@ -5,8 +5,8 @@ public class Klausur {
     private int zPunkte;
     private int zNote;
 
-    public Klausur(String zName) {
-        this.zName = zName;
+    public Klausur(String pName) {
+        this.zName = pName;
     }
 
     public String gibName() {
@@ -17,15 +17,15 @@ public class Klausur {
         return zPunkte;
     }
 
-    public void setzePunkte(int zPunkte) {
-        this.zPunkte = zPunkte;
+    public void setzePunkte(int pPunkte) {
+        this.zPunkte = pPunkte;
     }
 
     public int gibNote() {
         return zNote;
     }
 
-    public void setzeNote(int zNote) {
-        this.zNote = zNote;
+    public void setzeNote(int pNote) {
+        this.zNote = pNote;
     }
 }

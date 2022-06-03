@@ -1,7 +1,7 @@
 package adt.beispiele;
 
 public class Notentabelle {
-    private int[] grenzen = new int[6];
+    private int[] grenzen;
 
     public Notentabelle(int ...grenzen) {
         this.grenzen = grenzen;
