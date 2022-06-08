@@ -11,6 +11,13 @@ public class KlausurSimulation {
 
     public static void main(String[] args) {
         Kursarbeit ka = new Kursarbeit();
-        // ka.
+        ka.neueKlausur("Turing");
+        ka.neueKlausur("Babbage");
+        ka.neueKlausur("Knuth");
+        ka.neueKlausur("Zuse");
+        ka.neueKlausur("Boole");
+        ka.neueKlausur("Leibnitz");
+        ka.neueKlausur("Neumann");
+        ka.sortiere();
     }
 }

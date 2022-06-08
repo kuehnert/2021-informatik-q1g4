@@ -28,4 +28,9 @@ public class Klausur {
     public void setzeNote(int pNote) {
         this.zNote = pNote;
     }
+
+    @Override
+    public String toString() {
+        return zName;
+    }
 }

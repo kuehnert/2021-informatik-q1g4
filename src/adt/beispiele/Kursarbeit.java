@@ -7,6 +7,7 @@ public class Kursarbeit {
     private Stack<Klausur> hRechterStapel = new Stack<Klausur>();
     private Stack<Klausur> hArbeitsplatz = new Stack<Klausur>();
     private Notentabelle hNotentabelle = new Notentabelle(1, 2, 3, 4, 5, 6);
+    private int zAnzahlKlausuren = 0;
 
     public boolean istLinksLeer() {
         return hLinkerStapel.empty();
@@ -22,10 +23,13 @@ public class Kursarbeit {
 
     public void neueKlausur(String pName) {
         // Erstelle neue Klausur mit zName
+        Klausur kl = new Klausur(pName);
 
         // Lege sie auf Linker Stapel
+        hLinkerStapel.push(kl);
 
         // Erhöhe Anzahl der Klausuren um 1
+        zAnzahlKlausuren++;
     }
 
     public void legeVonLinksAufAP() {
@@ -50,7 +54,7 @@ public class Kursarbeit {
     public void zeigeSchritt() {
         System.out.println(hLinkerStapel.toString());
         System.out.println(hArbeitsplatz.toString());
-        System.out.println(hLinkerStapel.toString());
+        System.out.println(hRechterStapel.toString());
         System.out.println("-".repeat(80));
     }
 
@@ -62,8 +66,8 @@ public class Kursarbeit {
             legeVonLinksAufAP();
             zeigeSchritt();
             while (!hLinkerStapel.isEmpty()) {
-                Klausur lKlausur1 = (Klausur) hArbeitsplatz.top();
-                Klausur lKlausur2 = (Klausur) hLinkerStapel.top();
+                Klausur lKlausur1 = (Klausur) hArbeitsplatz.peek();
+                Klausur lKlausur2 = (Klausur) hLinkerStapel.peek();
                 String lName1 = lKlausur1.gibName();
                 String lName2 = lKlausur2.gibName();
 
@@ -80,5 +84,28 @@ public class Kursarbeit {
             legeVonAPNachRechts();
             zeigeSchritt();
         }
+    }
+
+    private void legeVonLinksNachRechts() {
+        if (istLinksLeer()) {
+            return;
+        }
+
+        Klausur kl = hLinkerStapel.pop();
+        hRechterStapel.push(kl);
+    }
+
+    private void legeAlleVonRechtsNachLinks() {
+        while (!hRechterStapel.isEmpty()) {
+            legeVonRechtsNachLinks();
+        }
+    }
+
+    private void legeVonRechtsNachLinks() {
+        if (istRechtsLeer()) {
+            return;
+        }
+
+        hLinkerStapel.push(hRechterStapel.pop());
     }
 }
