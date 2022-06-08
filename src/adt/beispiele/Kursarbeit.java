@@ -20,6 +20,14 @@ public class Kursarbeit {
         return hRechterStapel.empty();
     }
 
+    public void neueKlausur(String pName) {
+        // Erstelle neue Klausur mit zName
+
+        // Lege sie auf Linker Stapel
+
+        // Erhöhe Anzahl der Klausuren um 1
+    }
+
     public void legeVonLinksAufAP() {
         if (istLinksLeer()) {
             return;
