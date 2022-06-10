@@ -13,11 +13,11 @@ public class TestQueue {
 
     public static void testQueueKunde() {
         Queue<Kunde> q = new Queue<Kunde>();
-        q.enQueue(new Kunde("Tick", "Mickey"));
-        q.enQueue(new Kunde("Trick", "Vanille"));
-        q.enQueue(new Kunde("Track", "Schoko"));
+        q.enqueue(new Kunde("Tick", "Mickey"));
+        q.enqueue(new Kunde("Trick", "Vanille"));
+        q.enqueue(new Kunde("Track", "Schoko"));
         System.out.println(q.toString());
-        Kunde k = q.deQueue();
+        Kunde k = q.dequeue();
         System.out.println("Rausgeworfen: " + k);
     }
 

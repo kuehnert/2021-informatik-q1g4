@@ -1,14 +1,14 @@
 package adt.queue;
 
 public class Queue<T> {
-    Item<T> first;
+    protected Item<T> first;
 
     public Queue() {
         first = null;
     }
 
-    // add(Element e) => Hängt ein Element hinten an die Schlange an
-    public void enQueue(T data) {
+    // enqueue(Element e) => Hängt ein Element hinten an die Schlange an
+    public void enqueue(T data) {
         Item<T> tmp = new Item<T>(data);
 
         if (first == null) {
@@ -65,7 +65,7 @@ public class Queue<T> {
     }
 
     // deQueue(): Element => Entfernt das erste Element und gibt es zurück
-    public T deQueue() {
+    public T dequeue() {
         if (isEmpty()) {
             throw new RuntimeException("Queue ist leer!");
         }
