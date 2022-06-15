@@ -4,9 +4,19 @@ import adt.list.List;
 
 public class TestList {
     public static void main(String[] args) {
-        List<String> l = new List<>();
-        l.enqueue("Jonas");
+        // List<String> l = new List<>();
+        // l.enqueue("Jonas");
         // System.out.println(l.first); // proctected, daher kein Zugriff
+        testInsertAt();
+    }
+
+    public static void testInsertAt() {
+        List<Integer> l = new List<>();
+        l.enqueue(0);
+        l.enqueue(1);
+        l.enqueue(2);
+        l.insertAt(0, -1);
+        System.out.println(l.toString());
     }
 
     // private static void testGet() {
