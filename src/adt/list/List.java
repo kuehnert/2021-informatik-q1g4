@@ -6,11 +6,11 @@ import adt.queue.Queue;
 /*
  * Im Vergleich zur Queue Zusätzliche Methoden:
  *
- * 1. insertAt(int index, T data) => Einfügen an best. Stelle
+ * 1. ✓ insertAt(int index, T data) => Einfügen an best. Stelle
  * 2. deleteAt(int index) => Lösche Item an best. Stelle
  * 4. ✓ toString() => Ausgeben
  * 5. ✓ get(int index) => gib Daten von El an Stelle index
- * 5a- set(int index, T data)
+ * 5a 1/2✓ set(int index, T data)
  * 6. delete(T data) => Löscht El mit Daten data
  * 7. indexOf(T data) => gib index von El mit Daten data
  * 8. swap(int index1, int index2) => vertauscht El an index1 und index2
@@ -24,66 +24,47 @@ public class List<T> extends Queue {
     }
 
     public T get(int index) {
-        // Problem: index ist zu groß
-        if (index > getSize()) {
-            throw new IndexOutOfBoundsException("index too large");
-        }
+        checkIndex(index);
+        Item<T> runner = getItem(index);
+        return runner.getData();
+    }
+
+    private Item<T> getItem(int index) {
+        checkIndex(index);
 
         Item<T> runner = first;
-
         for (int i = 0; i < index; i++) {
             runner = runner.getNext();
         }
 
-        return runner.getData();
+        return runner;
     }
 
     public void insertAt(int index, T data) {
-        if (index < 0 || index > getSize()) {
-            throw new IllegalArgumentException("Bye-bye!");
-        }
-
         Item<T> ni = new Item<>(data);
+
         if (index == 0) {
             ni.setNext(first);
             first = ni;
         } else {
-            // 2. Gehe mit runner auf das Vorgänger-Element von index
-            Item<T> runner = first;
-            for (int i = 0; i < index-1; i++) {
-                runner = runner.getNext();
-            }
+            // 1. Gehe mit runner auf das Vorgänger-Element von index
+            Item<T> runner = getItem(index - 1);
 
-            // 3. Setze den Nachfolger vom neuen Element auf
+            // 2. Setze den Nachfolger vom neuen Element auf
             //    den alten Nachfolger von runner
             ni.setNext(runner.getNext());
 
-            // 4. Setze den Nachfolger von runner auf das neue
+            // 3. Setze den Nachfolger von runner auf das neue
             //    Element
             runner.setNext(ni);
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    private void checkIndex(int index) {
+        if (index < 0) {
+            throw new IndexOutOfBoundsException("index cannot be negative");
+        } else if (index > getSize()) {
+            throw new IndexOutOfBoundsException("index too large");
+        }
+    }
 }
