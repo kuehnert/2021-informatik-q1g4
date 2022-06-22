@@ -5,6 +5,16 @@ public class Kunde {
     String sorte;
     long queuedAt;
 
+    @Override
+    public boolean equals(Object other) {
+        if (!other.getClass().getSimpleName().equals("Kunde")) {
+            return false;
+        }
+
+        Kunde otherKunde = (Kunde) other;
+        return name.equals(otherKunde.name) && sorte.equals(otherKunde.sorte);
+    }
+
     public Kunde(String name, String sorte) {
         setName(name);
         setSorte(sorte);

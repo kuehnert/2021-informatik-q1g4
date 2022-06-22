@@ -1,13 +1,26 @@
 package adt.test;
 
+import adt.beispiele.Klausur;
+import adt.beispiele.Kunde;
 import adt.list.List;
 
 public class TestList {
+    public static void testEquals() {
+        Kunde k1 = new Kunde("Jonas", "Birne");
+        Kunde k2 = new Kunde("Jonas", "Birne");
+        Kunde k3 = new Kunde("Jonas", "Apfel");
+
+        System.out.println(k1.equals(k2));
+        System.out.println(k1.equals(k3));
+
+    }
+
     public static void main(String[] args) {
         // List<String> l = new List<>();
         // l.enqueue("Jonas");
         // System.out.println(l.first); // proctected, daher kein Zugriff
-        testInsertAt();
+        // testInsertAt();
+        testEquals();
     }
 
     public static void testInsertAt() {
@@ -16,7 +29,15 @@ public class TestList {
         l.enqueue(1);
         l.enqueue(2);
         l.insertAt(0, -1);
-        System.out.println(l.toString());
+        System.out.println(l);
+
+        List<Integer> l2 = new List<>();
+        l2.enqueue(0);
+        l2.enqueue(1);
+        l2.enqueue(2);
+        l2.enqueue(3);
+        l2.insertAt(2, -1);
+        System.out.println(l2);
     }
 
     // private static void testGet() {
